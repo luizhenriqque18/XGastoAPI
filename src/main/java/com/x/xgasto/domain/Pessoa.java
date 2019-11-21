@@ -23,10 +23,8 @@ public class Pessoa {
     @OneToOne(fetch = FetchType.EAGER)
     private Usuario usuario;
 
-    private Date dataCriacao;
-
-    private Date dataAtualizacao;
-
+    @Embedded
+    private Audit audit = new Audit();
 
     public Pessoa() {
     }
@@ -63,30 +61,6 @@ public class Pessoa {
         this.sexo = sexo;
     }
 
-//    @PreUpdate
-//    public Date PreUpdate() {
-//        return dataAtualizacao = new Date();
-//    }
-//
-//    @PrePersist
-//    public void PrePersist(Date dataAtualizacao) {
-//        final Date dateNow = new Date();
-//        this.dataCriacao = dateNow;
-//        this.dataAtualizacao = dateNow;
-//    }
-
-
-    @Override
-    public String toString() {
-        return "Pessoa{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", sexo=" + sexo +
-                ", usuario=" + usuario +
-                ", dataCriacao=" + dataCriacao +
-                ", dataAtualizacao=" + dataAtualizacao +
-                '}';
-    }
 }
 
 
