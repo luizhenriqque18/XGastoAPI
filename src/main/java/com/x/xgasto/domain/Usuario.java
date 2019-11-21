@@ -7,10 +7,10 @@ import java.util.Date;
 @Table(name = "usuario")
 public class Usuario {
 
-    @Column(name = "id", nullable = false)
+    @Id
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Pessoa pessoa;
 
     @Column(name = "email", nullable = false)
@@ -20,16 +20,12 @@ public class Usuario {
     private String password;
 
     private Date dataCriacao;
+
     private Date dataAtualizacao;
 
+    public Long getId() { return id; }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) { this.id = id; }
 
     public Pessoa getPessoa() {
         return pessoa;
@@ -55,15 +51,15 @@ public class Usuario {
         this.password = senha;
     }
 
-    @PreUpdate
-    public Date PreUpdate() {
-        return dataAtualizacao = new Date();
-    }
-
-    @PrePersist
-    public void PrePersist(Date dataAtualizacao) {
-        final Date dateNow = new Date();
-        this.dataCriacao = dateNow;
-        this.dataAtualizacao = dateNow;
-    }
+//    @PreUpdate
+//    public Date PreUpdate() {
+//        return dataAtualizacao = new Date();
+//    }
+//
+//    @PrePersist
+//    public void PrePersist(Date dataAtualizacao) {
+//        final Date dateNow = new Date();
+//        this.dataCriacao = dateNow;
+//        this.dataAtualizacao = dateNow;
+//    }
 }
