@@ -1,12 +1,21 @@
 package com.x.xgasto.dto;
 
 import com.x.xgasto.enums.SexoEnum;
+import com.x.xgasto.validator.ValidateEnum;
+import org.hibernate.validator.constraints.Length;
+import javax.validation.constraints.NotBlank;
+
 
 public class PessoaDto {
 
     private Long id;
+
+    @NotBlank(message = "Nome não poder ser vazio")
+    @Length(min = 5, max = 200, message = "Nome deve conter entre 5 e 200 caracteres.")
     private String nome;
-    private SexoEnum sexo;
+
+    @ValidateEnum(targetClassType = SexoEnum.class, message = "Sexo deve conter um opção M ou F.")
+    private String sexo;
 
     public PessoaDto() {
     }
@@ -27,11 +36,11 @@ public class PessoaDto {
         this.nome = nome;
     }
 
-    public SexoEnum getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(SexoEnum sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
