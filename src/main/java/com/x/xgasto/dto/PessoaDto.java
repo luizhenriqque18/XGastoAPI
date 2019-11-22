@@ -1,5 +1,6 @@
 package com.x.xgasto.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.x.xgasto.enums.SexoEnum;
 import com.x.xgasto.validator.ValidateEnum;
 import org.hibernate.validator.constraints.Length;
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 public class PessoaDto {
 
+    @JsonIgnore
     private Long id;
 
     @NotBlank(message = "Nome não poder ser vazio")

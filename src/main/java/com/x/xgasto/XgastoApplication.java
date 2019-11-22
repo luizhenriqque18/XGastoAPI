@@ -21,18 +21,18 @@ public class XgastoApplication {
         SpringApplication.run(XgastoApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner commandLineRunner(){
-        return args -> {
-            Pessoa pessoa  = new Pessoa();
-
-            pessoa.setNome("Luiz Henrique Oliveira de Souza");
-            pessoa.setSexo(SexoEnum.M);
-
-            //pessoaRepository.save(pessoa);
-
-            //List<Pessoa> pessoas = pessoaRepository.findAll();
-            //pessoas.forEach(System.out::println);
-        };
-    }
+//    @Bean
+//    public CommandLineRunner commandLineRunner(){
+//        return args -> {
+//            Pessoa pessoa  = new Pessoa();
+//
+//            pessoa.setNome("Luiz Henrique Oliveira de Souza");
+//            pessoa.setSexo(SexoEnum.M);
+//
+//            //pessoaRepository.save(pessoa);
+//
+//            //List<Pessoa> pessoas = pessoaRepository.findAll();
+//            //pessoas.forEach(System.out::println);
+//        };
+//    }
 }
