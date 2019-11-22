@@ -29,10 +29,10 @@ public class XgastoApplication {
             pessoa.setNome("Luiz Henrique Oliveira de Souza");
             pessoa.setSexo(SexoEnum.M);
 
-            pessoaRepository.save(pessoa);
+            //pessoaRepository.save(pessoa);
 
-            List<Pessoa> pessoas = pessoaRepository.findAll();
-            pessoas.forEach(System.out::println);
+            //List<Pessoa> pessoas = pessoaRepository.findAll();
+            //pessoas.forEach(System.out::println);
         };
     }
 }
