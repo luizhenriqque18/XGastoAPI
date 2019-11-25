@@ -2,6 +2,7 @@ package com.x.xgasto.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario")
@@ -15,13 +16,16 @@ public class Usuario {
     private Pessoa pessoa;
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Conta conta;
+    private List<Conta> conta;
 
     @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Embedded
+    private Audit audit = new Audit();
 
     public Long getId() {
         return id;
@@ -39,11 +43,11 @@ public class Usuario {
         this.pessoa = pessoa;
     }
 
-    public Conta getConta() {
+    public List<Conta> getConta() {
         return conta;
     }
 
-    public void setConta(Conta conta) {
+    public void setConta(List<Conta> conta) {
         this.conta = conta;
     }
 

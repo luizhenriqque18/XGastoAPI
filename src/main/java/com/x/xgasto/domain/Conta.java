@@ -11,10 +11,12 @@ public class Conta {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToOne(mappedBy = "conta", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne()
+    @JoinColumn(name = "banco_id")
     private Banco banco;
 
     @Embedded
