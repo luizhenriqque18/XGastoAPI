@@ -14,19 +14,22 @@ public class Usuario {
     @OneToOne(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Pessoa pessoa;
 
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Conta conta;
+
     @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "password", nullable = false)
     private String password;
 
-    private Date dataCriacao;
+    public Long getId() {
+        return id;
+    }
 
-    private Date dataAtualizacao;
-
-    public Long getId() { return id; }
-
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Pessoa getPessoa() {
         return pessoa;
@@ -34,6 +37,14 @@ public class Usuario {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    public Conta getConta() {
+        return conta;
+    }
+
+    public void setConta(Conta conta) {
+        this.conta = conta;
     }
 
     public String getEmail() {
@@ -44,23 +55,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getSenha() {
+    public String getPassword() {
         return password;
     }
 
-    public void setSenha(String senha) {
-        this.password = senha;
+    public void setPassword(String password) {
+        this.password = password;
     }
-
-//    @PreUpdate
-//    public Date PreUpdate() {
-//        return dataAtualizacao = new Date();
-//    }
-//
-//    @PrePersist
-//    public void PrePersist(Date dataAtualizacao) {
-//        final Date dateNow = new Date();
-//        this.dataCriacao = dateNow;
-//        this.dataAtualizacao = dateNow;
-//    }
 }

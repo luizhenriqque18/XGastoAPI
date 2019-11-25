@@ -33,9 +33,11 @@ public class PessoaController {
             return ResponseEntity.badRequest().body(new Response<PessoaDto>(null, listErros));
         }
 
-        pessoaDto.setId(1L);
+        Pessoa pessoa = pessoaDto.convertDtoParaPessoa(pessoaDto);
 
-        return ResponseEntity.ok(new Response<PessoaDto>(pessoaDto, null));
+        this.pessoaService.cadastrar(pessoa);
+
+        return ResponseEntity.ok(new Response<PessoaDto>(pessoaDto.convertPessoaParaDto(pessoa), null));
     }
 
     @GetMapping(value = "{nome}")
