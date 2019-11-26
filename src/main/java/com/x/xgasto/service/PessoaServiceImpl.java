@@ -1,4 +1,4 @@
-package com.x.xgasto.service.impl;
+package com.x.xgasto.service;
 
 import com.x.xgasto.domain.Pessoa;
 import com.x.xgasto.dto.PessoaDto;
@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PessoaServiceImpl {
 
-    List<Pessoa> GetAllPessoa();
+    public Pessoa findById(Long id);
 
-    Pessoa cadastrar(Pessoa pessoa);
+    public Pessoa create(Pessoa pessoa);
 }

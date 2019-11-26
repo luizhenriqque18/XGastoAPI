@@ -8,6 +8,10 @@ public class Response<T> {
     private T data;
     private List<String> errors;
 
+
+    public Response() {
+    }
+
     public Response(T data, List<String> errors) {
         this.data = data;
         this.errors = errors;

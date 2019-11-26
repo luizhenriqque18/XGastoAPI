@@ -26,6 +26,9 @@ public class Pessoa {
     @Embedded
     private Audit audit = new Audit();
 
+    public Pessoa(){
+
+    }
 
     public Pessoa(String nome, SexoEnum sexo) {
         this.nome = nome;

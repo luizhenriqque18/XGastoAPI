@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 
 public class PessoaDto {
 
-    //@JsonIgnore
+    @JsonIgnore
     private Long id;
 
     @NotBlank(message = "Nome não poder ser vazio")
@@ -25,6 +25,9 @@ public class PessoaDto {
         this.id = id;
         this.nome = nome;
         this.sexo = sexo;
+    }
+
+    public PessoaDto() {
     }
 
     public Long getId() {
