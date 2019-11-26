@@ -2,6 +2,8 @@ package com.x.xgasto.service.impl;
 
 
 import com.x.xgasto.domain.Pessoa;
+import com.x.xgasto.domain.Usuario;
+import com.x.xgasto.enums.SexoEnum;
 import com.x.xgasto.repository.PessoaRepository;
 import com.x.xgasto.service.PessoaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,7 @@ public class PessoaService implements PessoaServiceImpl {
         return pessoaRepository.findById(id).orElse(null);
     }
 
-    @Override
-    public Pessoa create(Pessoa pessoa) {
+    public Pessoa registerUser(Pessoa pessoa) {
         return pessoaRepository.save(pessoa);
     }
 }

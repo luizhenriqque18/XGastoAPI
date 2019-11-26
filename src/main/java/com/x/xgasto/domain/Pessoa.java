@@ -3,7 +3,6 @@ package com.x.xgasto.domain;
 import com.x.xgasto.enums.SexoEnum;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "pessoa")
@@ -17,10 +16,10 @@ public class Pessoa {
     private String nome;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "sexo", nullable = false)
+    @Column(name = "sexo")
     private SexoEnum sexo;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Usuario usuario;
 
     @Embedded
@@ -30,9 +29,8 @@ public class Pessoa {
 
     }
 
-    public Pessoa(String nome, SexoEnum sexo) {
+    public Pessoa(String nome) {
         this.nome = nome;
-        this.sexo = sexo;
     }
 
     public Usuario getUsuario() {

@@ -2,6 +2,7 @@ package com.x.xgasto.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.x.xgasto.domain.Pessoa;
+import com.x.xgasto.domain.Usuario;
 import com.x.xgasto.enums.SexoEnum;
 import com.x.xgasto.validator.ValidateEnum;
 import org.hibernate.validator.constraints.Length;
@@ -13,16 +14,18 @@ public class PessoaDto {
     @JsonIgnore
     private Long id;
 
+    private Usuario usuario;
+
     @NotBlank(message = "Nome não poder ser vazio")
     @Length(min = 5, max = 200, message = "Nome deve conter entre 5 e 200 caracteres.")
     private String nome;
 
-    @NotBlank(message = "Sexo não poder ser vazio")
     @ValidateEnum(targetClassType = SexoEnum.class, message = "Sexo deve conter um opção M ou F.")
     private String sexo;
 
-    public PessoaDto(Long id, String nome, String sexo) {
+    public PessoaDto(Long id, Usuario usuario, String nome, String sexo) {
         this.id = id;
+        this.usuario = usuario;
         this.nome = nome;
         this.sexo = sexo;
     }
@@ -54,6 +57,14 @@ public class PessoaDto {
         this.sexo = sexo;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
         return "PessoaDto{" +
@@ -64,15 +75,13 @@ public class PessoaDto {
     }
 
     public Pessoa convertDtoParaPessoa(PessoaDto pessoaDto){
-        return new Pessoa(
-                pessoaDto.getNome(),
-                SexoEnum.valueOf(pessoaDto.getSexo())
-        );
+        return new Pessoa();
     }
 
     public PessoaDto convertPessoaParaDto(Pessoa pessoa){
         return new PessoaDto(
                 pessoa.getId(),
+                pessoa.getUsuario(),
                 pessoa.getNome(),
                 String.valueOf(pessoa.getSexo())
         );
