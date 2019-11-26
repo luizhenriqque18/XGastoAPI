@@ -2,6 +2,7 @@ package com.x.xgasto.domain;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -20,8 +21,11 @@ public class Conta {
     @JoinColumn(name = "banco_id")
     private Banco banco;
 
-    @OneToMany(mappedBy = "conta",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Gasto> gasto;
+    @OneToMany(mappedBy = "conta",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Gasto> gastos;
+
+    @OneToMany(mappedBy = "conta",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Receita> receitas;
 
     @Embedded
     private Audit audit = new Audit();
