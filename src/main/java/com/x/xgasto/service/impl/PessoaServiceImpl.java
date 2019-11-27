@@ -2,17 +2,12 @@ package com.x.xgasto.service.impl;
 
 
 import com.x.xgasto.domain.Pessoa;
-import com.x.xgasto.domain.Usuario;
-import com.x.xgasto.enums.SexoEnum;
 import com.x.xgasto.repository.PessoaRepository;
-import com.x.xgasto.service.PessoaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
-
 @Service
-public class PessoaService implements PessoaServiceImpl {
+public class PessoaService implements com.x.xgasto.service.PessoaService {
 
     @Autowired
     private PessoaRepository pessoaRepository;

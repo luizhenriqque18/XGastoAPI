@@ -1,5 +1,7 @@
 package com.x.xgasto.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -13,12 +15,12 @@ public class Conta {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "usuario_id")
+    @JsonIgnore
     private Usuario usuario;
 
-    @ManyToOne()
-    @JoinColumn(name = "banco_id")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Banco banco;
 
     @OneToMany(mappedBy = "conta",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
