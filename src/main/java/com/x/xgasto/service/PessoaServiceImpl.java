@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PessoaServiceImpl {
 
-    public Pessoa findById(Long id);
+    Pessoa findById(Long id);
 
-    public Pessoa registerUser(Pessoa pessoa);
+    Pessoa registerUser(Pessoa pessoa);
 }

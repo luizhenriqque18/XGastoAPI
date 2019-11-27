@@ -14,7 +14,7 @@ public class Usuario {
 //    @OneToOne(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //    private Pessoa pessoa;
 
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Conta> conta;
 
     @Column(name = "email", nullable = false)
@@ -25,6 +25,9 @@ public class Usuario {
 
     @Embedded
     private Audit audit = new Audit();
+
+    public Usuario() {
+    }
 
     public Usuario(String email, String password) {
         this.email = email;

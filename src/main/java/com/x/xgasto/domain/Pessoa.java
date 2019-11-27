@@ -25,9 +25,7 @@ public class Pessoa {
     @Embedded
     private Audit audit = new Audit();
 
-    public Pessoa(){
-
-    }
+    public Pessoa(){ }
 
     public Pessoa(String nome) {
         this.nome = nome;

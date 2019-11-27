@@ -7,8 +7,11 @@ import com.x.xgasto.response.Response;
 import com.x.xgasto.service.UsuarioService;
 import com.x.xgasto.service.impl.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.query.Procedure;
+import org.springframework.data.repository.config.RepositoryNameSpaceHandler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -41,6 +44,7 @@ public class PessoaController {
         return ResponseEntity.ok(new Response<PessoaDto>(new PessoaDto().convertPessoaParaDto(pessoa), null));
     }
 
+
     @GetMapping(value = "findById/{id}")
     public ResponseEntity<Response<PessoaDto>>findById (@PathVariable("id") Long id){
 
@@ -55,4 +59,13 @@ public class PessoaController {
 
         return ResponseEntity.ok(new Response<PessoaDto>( new PessoaDto().convertPessoaParaDto(pessoa), null));
     }
+
+
+    private List<String> errosResponse(Errors errors){
+        return errors.getAllErrors()
+                .stream()
+                .map( error -> error.getDefaultMessage())
+                .collect(Collectors.toList());
+    }
+
 }

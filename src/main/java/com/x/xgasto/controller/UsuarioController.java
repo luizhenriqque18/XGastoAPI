@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,11 +34,25 @@ public class UsuarioController {
     @Autowired
     private UsuarioServiceImpl usuarioService;
 
-    @Autowired
-    private PessoaService pessoaService;
 
-    @Autowired
-    private PessoaRepository r;
+    @PostMapping(value = "signIn")
+    public ResponseEntity<Response<UsuarioDto>> signIn(
+            @RequestParam(name = "email") String email,
+            @RequestParam(name = "password") String password){
+
+        boolean pessoa = this.usuarioService.verifyEmail(email, password);
+
+        if(!pessoa){
+            List<String> errosList = new Response<UsuarioDto>().getErrors();
+            errosList.add("Verifique seu email ou senha solicitados!!!");
+
+            return ResponseEntity.badRequest().body(new Response<UsuarioDto>(null, errosList));
+        }
+
+        Usuario usuario = this.usuarioService.searchEmail(email);
+
+        return ResponseEntity.ok(new Response<UsuarioDto>(new UsuarioDto().convertUsuarioParaDto(usuario), null));
+    }
 
     /*@PostMapping
     public ResponseEntity<Response<UsuarioDto>> create(
