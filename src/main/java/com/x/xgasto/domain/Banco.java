@@ -1,5 +1,7 @@
 package com.x.xgasto.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -11,9 +13,6 @@ public class Banco {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @OneToMany(mappedBy = "banco", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Conta> conta;
 
     @Column(name = "img_url")
     private String imgUrl;
@@ -35,13 +34,13 @@ public class Banco {
         this.id = id;
     }
 
-    public List<Conta> getConta() {
+    /*public List<Conta> getConta() {
         return conta;
     }
 
     public void setConta(List<Conta> conta) {
         this.conta = conta;
-    }
+    }*/
 
     public String getImgUrl() {
         return imgUrl;

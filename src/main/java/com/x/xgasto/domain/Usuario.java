@@ -1,5 +1,7 @@
 package com.x.xgasto.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,12 +16,15 @@ public class Usuario {
 //    @OneToOne(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //    private Pessoa pessoa;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //@OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    //@Column(nullable = false)
+    @OneToMany(mappedBy = "usuario")
     private List<Conta> conta;
 
     @Column(name = "email", nullable = false)
     private String email;
 
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
 

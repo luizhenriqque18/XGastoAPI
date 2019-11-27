@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface PessoaServiceImpl {
+public interface PessoaService {
 
     Pessoa findById(Long id);
 

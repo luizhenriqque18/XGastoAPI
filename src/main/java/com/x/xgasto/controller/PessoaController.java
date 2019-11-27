@@ -4,18 +4,12 @@ import com.x.xgasto.domain.Pessoa;
 import com.x.xgasto.domain.Usuario;
 import com.x.xgasto.dto.PessoaDto;
 import com.x.xgasto.response.Response;
-import com.x.xgasto.service.UsuarioService;
-import com.x.xgasto.service.impl.PessoaService;
+import com.x.xgasto.service.impl.PessoaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.query.Procedure;
-import org.springframework.data.repository.config.RepositoryNameSpaceHandler;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +20,7 @@ import java.util.stream.Collectors;
 public class PessoaController {
 
     @Autowired
-    private PessoaService pessoaService;
+    private PessoaServiceImpl pessoaServiceImpl;
 
     @PostMapping
     public ResponseEntity<Response<PessoaDto>> registerUser(
@@ -39,7 +33,7 @@ public class PessoaController {
         pessoa.setUsuario(usuario);
         pessoa.setNome(nome);
 
-        this.pessoaService.registerUser(pessoa);
+        this.pessoaServiceImpl.registerUser(pessoa);
 
         return ResponseEntity.ok(new Response<PessoaDto>(new PessoaDto().convertPessoaParaDto(pessoa), null));
     }
@@ -48,7 +42,7 @@ public class PessoaController {
     @GetMapping(value = "findById/{id}")
     public ResponseEntity<Response<PessoaDto>>findById (@PathVariable("id") Long id){
 
-        Pessoa pessoa = pessoaService.findById(id);
+        Pessoa pessoa = pessoaServiceImpl.findById(id);
 
         if(pessoa == null){
             List<String> listErros = new ArrayList<String>();

@@ -1,5 +1,6 @@
 package com.x.xgasto.service.impl;
 
+import com.x.xgasto.domain.Conta;
 import com.x.xgasto.domain.Pessoa;
 import com.x.xgasto.domain.Usuario;
 import com.x.xgasto.repository.UsuarioRepository;
@@ -7,6 +8,7 @@ import com.x.xgasto.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,6 +33,4 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario searchEmail(String email) {
         return this.usuarioRepository.findByEmail(email).orElse(null);
     }
-
-
 }

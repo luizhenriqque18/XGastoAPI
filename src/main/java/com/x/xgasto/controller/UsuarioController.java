@@ -1,29 +1,21 @@
 package com.x.xgasto.controller;
 
 
-import com.x.xgasto.domain.Pessoa;
+import com.x.xgasto.domain.Conta;
 import com.x.xgasto.domain.Usuario;
-import com.x.xgasto.dto.PessoaDto;
 import com.x.xgasto.dto.UsuarioDto;
-import com.x.xgasto.enums.SexoEnum;
-import com.x.xgasto.repository.PessoaRepository;
 import com.x.xgasto.response.Response;
-import com.x.xgasto.service.impl.PessoaService;
+import com.x.xgasto.service.impl.ContaServiceImpl;
 import com.x.xgasto.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.RequestEntity;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Controller
@@ -33,6 +25,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioServiceImpl usuarioService;
+
+    @Autowired
+    private ContaServiceImpl contaService;
 
 
     @PostMapping(value = "signIn")
@@ -50,6 +45,7 @@ public class UsuarioController {
         }
 
         Usuario usuario = this.usuarioService.searchEmail(email);
+        usuario.setConta(this.contaService.findByContaByUsuario(usuario.getId()));
 
         return ResponseEntity.ok(new Response<UsuarioDto>(new UsuarioDto().convertUsuarioParaDto(usuario), null));
     }
