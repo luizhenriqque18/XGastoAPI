@@ -33,4 +33,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario searchEmail(String email) {
         return this.usuarioRepository.findByEmail(email).orElse(null);
     }
+
+    @Override
+    public Usuario findById(Long idUsuario) {
+        return this.usuarioRepository.findById(idUsuario).orElse(null);
+    }
 }

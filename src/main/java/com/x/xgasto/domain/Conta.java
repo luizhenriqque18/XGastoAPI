@@ -32,6 +32,11 @@ public class Conta {
     @Embedded
     private Audit audit = new Audit();
 
+    public Conta(Usuario usuario, Banco banco) {
+        this.usuario = usuario;
+        this.banco = banco;
+    }
+
     public Long getId() {
         return id;
     }

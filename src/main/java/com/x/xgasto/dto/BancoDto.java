@@ -1,34 +1,24 @@
-package com.x.xgasto.domain;
+package com.x.xgasto.dto;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.x.xgasto.domain.Banco;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "banco")
-public class Banco {
+public class BancoDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Long id;
 
-    @Column(name = "img_url")
     private String imgUrl;
 
-    @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @Column(name = "saldo")
     private BigDecimal saldo;
 
-    @Embedded
-    private Audit audit = new Audit();
-
-    public Banco() {
-    }
-
-    public Banco(String imgUrl, String descricao, BigDecimal saldo) {
+    public BancoDto(Long id, String imgUrl, String descricao, BigDecimal saldo) {
+        this.id = id;
         this.imgUrl = imgUrl;
         this.descricao = descricao;
         this.saldo = saldo;
@@ -41,14 +31,6 @@ public class Banco {
     public void setId(Long id) {
         this.id = id;
     }
-
-    /*public List<Conta> getConta() {
-        return conta;
-    }
-
-    public void setConta(List<Conta> conta) {
-        this.conta = conta;
-    }*/
 
     public String getImgUrl() {
         return imgUrl;
@@ -72,5 +54,13 @@ public class Banco {
 
     public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
+    }
+
+    public Banco convertDtoParaBanco(BancoDto bancoDto){
+        return new Banco(bancoDto.imgUrl, bancoDto.descricao, bancoDto.saldo);
+    }
+
+    public BancoDto convertBancoParaDto(Banco banco){
+        return new BancoDto(banco.getId(), banco.getImgUrl(), banco.getDescricao(), banco.getSaldo());
     }
 }

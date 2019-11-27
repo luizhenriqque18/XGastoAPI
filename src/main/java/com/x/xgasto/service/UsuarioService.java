@@ -13,4 +13,6 @@ public interface UsuarioService {
     boolean verifyEmail(String email, String password);
 
     Usuario searchEmail(String email);
+
+    Usuario findById(Long id);
 }
