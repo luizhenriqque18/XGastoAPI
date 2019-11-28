@@ -21,9 +21,11 @@ public class Conta {
     @JsonIgnore
     private Usuario usuario;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "conta",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Gasto> gastos;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "conta",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Receita> receitas;
 
@@ -64,6 +66,14 @@ public class Conta {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public List<Gasto> getGastos() {
+        return gastos;
+    }
+
+    public void setGastos(List<Gasto> gastos) {
+        this.gastos = gastos;
     }
 
     public List<Receita> getReceitas() {

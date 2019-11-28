@@ -1,43 +1,35 @@
-package com.x.xgasto.domain;
+package com.x.xgasto.dto;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.x.xgasto.domain.CategoriaGasto;
+import com.x.xgasto.domain.Conta;
+import com.x.xgasto.domain.Gasto;
+
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "gasto")
-public class Gasto {
+public class GastoDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne()
-    @JoinColumn(name = "conta_id")
+    @JsonIgnore
     private Conta conta;
 
-    @ManyToOne()
-    @JoinColumn(name = "cat_gasto_id")
+    @JsonIgnore
     private CategoriaGasto categoriaGasto;
 
-    @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "valor")
     private BigDecimal valor;
 
-    @Column(name = "parcela")
     private Long parcela;
 
-    @Column(name = "percelaFixa")
     private Long percelaFixa;
 
-    @Embedded
-    private Audit audit = new Audit();
-
-    public Gasto() {
+    public GastoDto() {
     }
 
-    public Gasto(String descricao, BigDecimal valor, Long parcela, Long percelaFixa) {
+    public GastoDto(Long id, String descricao, BigDecimal valor, Long parcela, Long percelaFixa) {
+        this.id = id;
         this.descricao = descricao;
         this.valor = valor;
         this.parcela = parcela;
@@ -98,5 +90,13 @@ public class Gasto {
 
     public void setPercelaFixa(Long percelaFixa) {
         this.percelaFixa = percelaFixa;
+    }
+
+    public Gasto convertDtoParaGasto(GastoDto gastoDto){
+        return new Gasto(gastoDto.getDescricao(), gastoDto.getValor(), gastoDto.parcela, gastoDto.getPercelaFixa());
+    }
+
+    public GastoDto convertGastoParaDto(Gasto gasto){
+        return new GastoDto(gasto.getId(), gasto.getDescricao(),gasto.getValor(),gasto.getParcela(), gasto.getPercelaFixa());
     }
 }

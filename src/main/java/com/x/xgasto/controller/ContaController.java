@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("api/banco")
+@RequestMapping("api/conta")
 public class ContaController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class ContaController {
     @Autowired
     private UsuarioServiceImpl usuarioService;
 
-    @PostMapping(name = "create")
+    @PostMapping("create")
     public ResponseEntity<Response<ContaDto>> create(@RequestParam("idUsuario") Long idUsuario,
                                                      @RequestBody ContaDto contaDto){
         List<String> listErrors = new ArrayList<String>();
