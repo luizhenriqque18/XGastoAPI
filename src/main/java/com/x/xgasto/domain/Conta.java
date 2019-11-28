@@ -3,6 +3,7 @@ package com.x.xgasto.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -20,21 +21,33 @@ public class Conta {
     @JsonIgnore
     private Usuario usuario;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Banco banco;
-
     @OneToMany(mappedBy = "conta",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Gasto> gastos;
 
     @OneToMany(mappedBy = "conta",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Receita> receitas;
 
+    @Column(name = "img_url")
+    private String imgUrl;
+
+    @Column(name = "descricao", nullable = false)
+    private String descricao;
+
+    @Column(name = "saldo")
+    private BigDecimal saldo;
+
     @Embedded
     private Audit audit = new Audit();
 
-    public Conta(Usuario usuario, Banco banco) {
+    public Conta() {
+
+    }
+
+    public Conta(String imgUrl, String descricao, BigDecimal saldo, Usuario usuario) {
+        this.imgUrl = imgUrl;
+        this.descricao = descricao;
+        this.saldo = saldo;
         this.usuario = usuario;
-        this.banco = banco;
     }
 
     public Long getId() {
@@ -53,11 +66,43 @@ public class Conta {
         this.usuario = usuario;
     }
 
-    public Banco getBanco() {
-        return banco;
+    public List<Receita> getReceitas() {
+        return receitas;
     }
 
-    public void setBanco(Banco banco) {
-        this.banco = banco;
+    public void setReceitas(List<Receita> receitas) {
+        this.receitas = receitas;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
+    }
+
+    public Audit getAudit() {
+        return audit;
+    }
+
+    public void setAudit(Audit audit) {
+        this.audit = audit;
     }
 }

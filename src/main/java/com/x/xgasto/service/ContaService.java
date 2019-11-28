@@ -7,4 +7,10 @@ import java.util.List;
 public interface ContaService {
 
     List<Conta> findByContaByUsuario(Long id);
+
+    Conta createOrUpdate(Conta conta);
+
+    Conta findById(Long idConta);
+
+    void delete(Conta conta);
 }

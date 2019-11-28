@@ -2,13 +2,13 @@ package com.x.xgasto.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.x.xgasto.domain.Banco;
+import com.x.xgasto.domain.Conta;
+import com.x.xgasto.domain.Usuario;
 
 import java.math.BigDecimal;
 
-public class BancoDto {
+public class ContaDto {
 
-    @JsonIgnore
     private Long id;
 
     private String imgUrl;
@@ -17,11 +17,18 @@ public class BancoDto {
 
     private BigDecimal saldo;
 
-    public BancoDto(Long id, String imgUrl, String descricao, BigDecimal saldo) {
+    @JsonIgnore
+    private Usuario usuario;
+
+    public ContaDto() {
+    }
+
+    public ContaDto(Long id, String imgUrl, String descricao, BigDecimal saldo, Usuario usuario) {
         this.id = id;
         this.imgUrl = imgUrl;
         this.descricao = descricao;
         this.saldo = saldo;
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -56,11 +63,19 @@ public class BancoDto {
         this.saldo = saldo;
     }
 
-    public Banco convertDtoParaBanco(BancoDto bancoDto){
-        return new Banco(bancoDto.imgUrl, bancoDto.descricao, bancoDto.saldo);
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public BancoDto convertBancoParaDto(Banco banco){
-        return new BancoDto(banco.getId(), banco.getImgUrl(), banco.getDescricao(), banco.getSaldo());
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Conta convertDtoParaConta(ContaDto contaDto){
+        return new Conta(contaDto.imgUrl, contaDto.descricao, contaDto.saldo, contaDto.usuario);
+    }
+
+    public ContaDto convertContaParaDto(Conta conta){
+        return new ContaDto(conta.getId(), conta.getImgUrl(), conta.getDescricao(), conta.getSaldo(), conta.getUsuario());
     }
 }

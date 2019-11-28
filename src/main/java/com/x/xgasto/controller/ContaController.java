@@ -1,11 +1,10 @@
 package com.x.xgasto.controller;
 
-import com.x.xgasto.domain.Banco;
+import com.x.xgasto.domain.Conta;
 import com.x.xgasto.domain.Usuario;
-import com.x.xgasto.dto.BancoDto;
-import com.x.xgasto.dto.PessoaDto;
+import com.x.xgasto.dto.ContaDto;
 import com.x.xgasto.response.Response;
-import com.x.xgasto.service.impl.BancoServiceImpl;
+import com.x.xgasto.service.impl.ContaServiceImpl;
 import com.x.xgasto.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,83 +16,91 @@ import java.util.List;
 
 @Controller
 @RequestMapping("api/banco")
-public class BancoController {
+public class ContaController {
 
     @Autowired
-    private BancoServiceImpl bancoService;
+    private ContaServiceImpl contaService;
 
     @Autowired
     private UsuarioServiceImpl usuarioService;
 
     @PostMapping(name = "create")
-    public ResponseEntity<Response<BancoDto>> create(@RequestParam("idUsuario") Long idUsuario,
-                                                     @RequestBody BancoDto bancoDto){
+    public ResponseEntity<Response<ContaDto>> create(@RequestParam("idUsuario") Long idUsuario,
+                                                     @RequestBody ContaDto contaDto){
         List<String> listErrors = new ArrayList<String>();
 
         Usuario usuario = this.usuarioService.findById(idUsuario);
 
         if(usuario == null){
             listErrors.add("Erro no usurio!!!");
-            return ResponseEntity.badRequest().body(new Response<BancoDto>(null, listErrors));
+            return ResponseEntity.badRequest().body(new Response<ContaDto>(null, listErrors));
         }
 
-        Banco banco = this.bancoService.createOrUpdate(bancoDto.convertDtoParaBanco(bancoDto));
+        contaDto.setUsuario(usuario);
+        Conta conta = this.contaService.createOrUpdate(contaDto.convertDtoParaConta(contaDto));
 
-        if(banco == null){
-            listErrors.add("Não foi possivel criar Banco. Tente Novamente!!!");
-            return ResponseEntity.badRequest().body(new Response<BancoDto>(null, listErrors));
+        if(conta == null){
+            listErrors.add("Não foi possivel criar Conta. Tente Novamente!!!");
+            return ResponseEntity.badRequest().body(new Response<ContaDto>(null, listErrors));
         }
 
-        boolean isNotJoinContaWithBanco = this.bancoService.joinContaWithBanco(banco, usuario);
-
-        if(isNotJoinContaWithBanco){
-            listErrors.add("Não foi possivel criar Banco. Tente Novamente!!!");
-            return ResponseEntity.badRequest().body(new Response<BancoDto>(null, listErrors));
-        }
-
-        return ResponseEntity.ok(new Response<BancoDto>(bancoDto.convertBancoParaDto(banco), null));
+        return ResponseEntity.ok(new Response<ContaDto>(contaDto.convertContaParaDto(conta), null));
     }
 
     @PutMapping("update")
-    public ResponseEntity<Response<BancoDto>> update(@RequestParam("idBanco") Long idBanco,
-                                                  @RequestBody BancoDto bancoDto){
+    public ResponseEntity<Response<ContaDto>> update(@RequestParam("idConta") Long idConta,
+                                                     @RequestBody ContaDto contaDto){
         List<String> listErrors = new ArrayList<String>();
 
-        Banco banco = this.bancoService.findById(idBanco);
+        Conta conta = this.contaService.findById(idConta);
 
-        if(banco == null){
-            listErrors.add("Banco não encontrado!!!");
-            return ResponseEntity.badRequest().body(new Response<BancoDto>(null, listErrors));
+        if(conta == null){
+            listErrors.add("Conta não encontrado!!!");
+            return ResponseEntity.badRequest().body(new Response<ContaDto>(null, listErrors));
         }
 
-        banco.setDescricao(bancoDto.getDescricao());
-        banco.setImgUrl(bancoDto.getImgUrl());
-        banco.setSaldo(bancoDto.getSaldo());
+        conta.setDescricao(contaDto.getDescricao());
+        conta.setImgUrl(contaDto.getImgUrl());
+        conta.setSaldo(contaDto.getSaldo());
 
-        banco = this.bancoService.createOrUpdate(banco);
+        conta = this.contaService.createOrUpdate(conta);
 
-        if(banco == null){
+        if(conta == null){
             listErrors.add("Banco não foi atualizado!!!");
-            return ResponseEntity.badRequest().body(new Response<BancoDto>(null, listErrors));
+            return ResponseEntity.badRequest().body(new Response<ContaDto>(null, listErrors));
         }
 
-        return ResponseEntity.ok(new Response<BancoDto>(bancoDto.convertBancoParaDto(banco), null));
+        return ResponseEntity.ok(new Response<ContaDto>(contaDto.convertContaParaDto(conta), null));
     }
 
-    @DeleteMapping(value = "delete/{idBanco}")
-    public ResponseEntity<Response<String>> delete(@PathVariable("idBanco") Long idBanco){
+    @DeleteMapping(value = "delete/{idConta}")
+    public ResponseEntity<Response<String>> delete(@PathVariable("idConta") Long idConta){
 
         List<String> listErrors = new ArrayList<String>();
 
-        Banco banco = this.bancoService.findById(idBanco);
+        Conta banco = this.contaService.findById(idConta);
 
         if(banco == null){
             listErrors.add("Banco não encontrado!!!");
             return ResponseEntity.badRequest().body(new Response<String>(null, listErrors));
         }
 
-        this.bancoService.delete(banco);
+        this.contaService.delete(banco);
 
         return ResponseEntity.ok(new Response<String>("Sucesses", null));
+    }
+
+    @GetMapping(value = "findConta/{idConta}")
+    public ResponseEntity<Response<ContaDto>> findByIdConta(@PathVariable("idConta") Long idConta){
+        List<String> listErrors = new ArrayList<String>();
+
+        Conta conta = this.contaService.findById(idConta);
+
+        if(conta == null){
+            listErrors.add("Conta não encontrado!!!");
+            return ResponseEntity.badRequest().body(new Response<ContaDto>(null, listErrors));
+        }
+
+        return ResponseEntity.ok(new Response<ContaDto>(new ContaDto().convertContaParaDto(conta), null));
     }
 }
