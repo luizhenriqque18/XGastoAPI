@@ -35,7 +35,7 @@ export class SignInComponent implements OnInit {
       .subscribe(
         (resp) => {
           const {id} = resp.data;
-          this.router.navigate(['painel', id]);
+          this.router.navigate(['painel']);
         },
         err => {
           this.userNameInput.nativeElement.focus();

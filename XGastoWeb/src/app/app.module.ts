@@ -10,12 +10,13 @@ import { HeaderComponent } from './core/header/header.component';
 import {CoreModule} from './core/core.module';
 import {HomeModule} from './home/home.module';
 import { PainelComponent } from './painel/painel.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import {ErrorsModule} from './errors/errors.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PainelComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -23,6 +24,7 @@ import { PainelComponent } from './painel/painel.component';
     HttpClientModule,
     CoreModule,
     HomeModule,
+    ErrorsModule,
     XGastoApi
   ],
   providers: [{

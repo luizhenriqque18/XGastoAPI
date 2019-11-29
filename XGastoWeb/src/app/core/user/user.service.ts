@@ -18,8 +18,9 @@ export class UserService {
     this.decodeAndNotify();
   }
 
-  setToken(token: UsuarioDto){
+  setToken(token: UsuarioDto) {
     this.tokenService.setToken(JSON.stringify(token));
+    this.decodeAndNotify();
   }
 
   getUser() {
@@ -39,7 +40,6 @@ export class UserService {
   }
 
   isLogged() {
-    console.log('hasToken');
     return this.tokenService.hasToken();
   }
 

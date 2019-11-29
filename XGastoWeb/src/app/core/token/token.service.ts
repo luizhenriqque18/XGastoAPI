@@ -8,7 +8,6 @@ const KEY = 'authToken';
 export class TokenService {
 
   hasToken() {
-    console.log('hasToken', this.getToken());
     return this.getToken() != null;
   }
 
