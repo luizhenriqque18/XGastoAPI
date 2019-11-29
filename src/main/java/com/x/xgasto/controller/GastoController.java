@@ -18,6 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("api/gasto")
+@CrossOrigin(origins = "*")
 public class GastoController {
 
     @Autowired

@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import {UsuarioControllerService} from './shared/xGastoApi/api/api';
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: '<app-header></app-header> <router-outlet></router-outlet>'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'XGastoWeb';
+  constructor(private api: UsuarioControllerService) { }
+
+  ngOnInit(): void {
+  }
 }

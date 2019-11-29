@@ -16,6 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("api/conta")
+@CrossOrigin(origins = "*")
 public class ContaController {
 
     @Autowired

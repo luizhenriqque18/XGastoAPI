@@ -1,0 +1,15 @@
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand">XGasto</a>
+  <form class="form-inline">
+    <div *ngIf="(user$ | async) as user; else login">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a [routerLink]="['']">Entrar</a></button>
+      <a class="mr-1">{{ user.email}}</a>
+      <a (click)="logout()">(Logout)</a>
+      {{(user$ | async)}}
+    </div>
+  </form>
+</nav>
+
+<ng-template #login>
+  <button class="btn btn-outline-danger my-2 my-sm-0" type="submit"><a [routerLink]="['']">Sair</a></button>
+</ng-template>
