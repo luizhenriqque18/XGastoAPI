@@ -104,4 +104,18 @@ public class ContaController {
 
         return ResponseEntity.ok(new Response<ContaDto>(new ContaDto().convertContaParaDto(conta), null));
     }
+
+    @GetMapping(value = "findContaByUsuario/{idUsuario}")
+    public ResponseEntity<Response<List<ContaDto>>> findContaByUsuario(@PathVariable("idUsuario") Long idUsuario){
+        List<String> listErrors = new ArrayList<String>();
+
+        List<Conta> conta = this.contaService.findByContaByUsuario(idUsuario);
+
+        if(conta == null){
+            listErrors.add("Conta não encontrado!!!");
+            return ResponseEntity.badRequest().body(new Response<List<ContaDto>>(null, listErrors));
+        }
+
+        return ResponseEntity.ok(new Response<List<ContaDto>>(new ContaDto().convertContaParaListConta(conta), null));
+    }
 }

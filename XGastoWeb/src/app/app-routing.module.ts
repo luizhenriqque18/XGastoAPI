@@ -7,14 +7,14 @@ import {NotFoundComponent} from './errors/not-found/not-found.component';
 
 const routes: Routes = [
   {
-    path: 'painel',
-    loadChildren: () => import('./painel/painel.module')
-      .then( m => m.PainelModule),
-  },
-  {
     path: '',
     component: SignInComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'painel',
+    loadChildren: () => import('./painel/painel.module')
+      .then( m => m.PainelModule),
   },
   {
     path: '**',

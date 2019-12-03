@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ContaService {
 
-    List<Conta> findByContaByUsuario(Long id);
+    List<Conta> findByContaByUsuario(Long idUsuario);
 
     Conta createOrUpdate(Conta conta);
 

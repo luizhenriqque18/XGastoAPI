@@ -20,6 +20,7 @@ import { Observable }                                        from 'rxjs/Observab
 
 import { ContaDto } from '../model/contaDto';
 import { ResponseContaDto } from '../model/responseContaDto';
+import { ResponseListContaDto } from '../model/responseListContaDto';
 import { Responsestring } from '../model/responsestring';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -29,7 +30,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class ContaControllerService {
 
-    protected basePath = 'http://localhost:8080';
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -191,6 +192,48 @@ export class ContaControllerService {
         ];
 
         return this.httpClient.get<ResponseContaDto>(`${this.basePath}/api/conta/findConta/${encodeURIComponent(String(idConta))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * findContaByUsuario
+     * 
+     * @param idUsuario idUsuario
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public findContaByUsuarioUsingGET(idUsuario: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseListContaDto>;
+    public findContaByUsuarioUsingGET(idUsuario: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseListContaDto>>;
+    public findContaByUsuarioUsingGET(idUsuario: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseListContaDto>>;
+    public findContaByUsuarioUsingGET(idUsuario: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (idUsuario === null || idUsuario === undefined) {
+            throw new Error('Required parameter idUsuario was null or undefined when calling findContaByUsuarioUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<ResponseListContaDto>(`${this.basePath}/api/conta/findContaByUsuario/${encodeURIComponent(String(idUsuario))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

@@ -6,6 +6,8 @@ import com.x.xgasto.domain.Conta;
 import com.x.xgasto.domain.Usuario;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ContaDto {
 
@@ -77,5 +79,12 @@ public class ContaDto {
 
     public ContaDto convertContaParaDto(Conta conta){
         return new ContaDto(conta.getId(), conta.getImgUrl(), conta.getDescricao(), conta.getSaldo(), conta.getUsuario());
+    }
+
+    public List<ContaDto > convertContaParaListConta(List<Conta> contaList){
+        List<ContaDto> contaDtos = contaList.stream()
+                .map(conta -> new ContaDto(conta.getId(), conta.getImgUrl(), conta.getDescricao(), conta.getSaldo(), conta.getUsuario()))
+                .collect(Collectors.toList());
+        return contaDtos;
     }
 }

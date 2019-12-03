@@ -1,31 +1,7 @@
-<div class="card m-sm-2 m-lg-2 m-md-2 m-xl-2 m-2">
+<div *ngFor="let conta of contas" class="card m-sm-2 m-lg-2 m-md-2 m-xl-2 m-2">
   <div class="card-body">
-    <h5 class="card-title">Neon</h5>
-    <p class="card-text">R$ 500,00</p>
+    <h5 class="card-title">{{ conta.descricao }}</h5>
+    <p class="card-text">{{ conta.saldo }}</p>
     <a [routerLink]="['conta']" class="btn btn-primary">Lançamentos</a>
-  </div>
-</div>
-
-<div class="card m-sm-2 m-lg-2 m-md-2 m-xl-2 m-2">
-  <div class="card-body">
-    <h5 class="card-title">Neon</h5>
-    <p class="card-text">R$ 500,00</p>
-    <a href="#" class="btn btn-primary">Lançamentos</a>
-  </div>
-</div>
-
-<div class="card m-sm-2 m-lg-2 m-md-2 m-xl-2 m-2">
-  <div class="card-body">
-    <h5 class="card-title">Neon</h5>
-    <p class="card-text">R$ 500,00</p>
-    <a href="#" class="btn btn-primary">Lançamentos</a>
-  </div>
-</div>
-
-<div class="card m-sm-2 m-lg-2 m-md-2 m-xl-2 m-2">
-  <div class="card-body">
-    <h5 class="card-title">Neon</h5>
-    <p class="card-text">R$ 500,00</p>
-    <a href="#" class="btn btn-primary">Lançamentos</a>
   </div>
 </div>

@@ -3,7 +3,7 @@
   <form class="form-inline">
     <div *ngIf="(user$ | async) as user ; else login">
       <a class="mr-1">{{ user.email}}</a>
-      <button class="btn btn-outline-danger my-2 my-sm-0" type="submit"><a (click)="logout()" [routerLink]="['']">Sair</a></button>
+      <button class="btn btn-outline-danger my-2 my-sm-0" type="submit"><a (click)="logout()">Sair</a></button>
     </div>
   </form>
 </nav>
