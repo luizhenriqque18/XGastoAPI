@@ -2,12 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {PainelComponent} from './painel.component';
 import {AuthGuard} from '../core/auth/auth.guard';
+import {LancamentoComponent} from "./lancamento/lancamento.component";
 
 
 const routes: Routes = [
     {
       path: '',
       component: PainelComponent,
+    },
+    {
+      path: 'conta',
+      component: LancamentoComponent,
     },
     { path: '', redirectTo: '', pathMatch: 'full' },
     { path: '**', redirectTo: '' }
