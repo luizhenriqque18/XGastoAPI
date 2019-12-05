@@ -9,7 +9,7 @@
         <form [formGroup]="formulario">
           <div class="form-group">
             <label for="input-conta">Conta</label>
-            <input formControlName="conta" type="conta" class="form-control" id="input-conta" aria-describedby="contaHelp">
+            <input formControlName="desc_conta" type="conta" class="form-control" id="input-conta" aria-describedby="contaHelp">
             <small id="contaHelp" class="form-text text-muted">{{formulario.contains('conta')}}</small>
           </div>
           <div class="form-group">
@@ -20,10 +20,9 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" (click)="save()" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Cadastrar ou Salvar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" (click)="save()" class="btn btn-primary">Cadastrar ou Salvar</button>
       </div>
-
     </div>
   </div>
 </div>

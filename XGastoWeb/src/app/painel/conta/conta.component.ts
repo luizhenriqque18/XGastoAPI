@@ -12,9 +12,13 @@ export class ContaComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) { }
 
   private contas: Array<ContaDto>;
+  public edit: boolean;
 
   ngOnInit() {
-    this.contas = this.activatedRoute.snapshot.data['PainelResolver'].data;
+    this.contas = this.activatedRoute.snapshot.data.PainelResolver.data;
   }
 
+  public editar() {
+    this.edit = true;
+  }
 }

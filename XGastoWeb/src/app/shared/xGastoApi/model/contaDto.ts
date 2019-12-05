@@ -11,7 +11,7 @@
  */
 
 
-export interface ContaDto { 
+export interface ContaDto {
     descricao?: string;
     id?: number;
     imgUrl?: string;
