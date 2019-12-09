@@ -22,6 +22,7 @@
     "@angular/router": "~8.2.12",
     "@nebular/eva-icons": "4.6.0",
     "@nebular/theme": "^4.6.0",
+    "@ngx-pwa/local-storage": "^8.2.3",
     "bootstrap": "^4.4.1",
     "eva-icons": "^1.1.2",
     "jquery": "^3.4.1",

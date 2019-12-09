@@ -3,25 +3,30 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Atualizar ou Cadastrar</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{isUpdate? 'Atualizar Conta' : 'Cadastrar Conta'}}</h5>
       </div>
       <div class="modal-body text-left">
         <form [formGroup]="formulario">
           <div class="form-group">
             <label for="input-conta">Conta</label>
-            <input formControlName="desc_conta" type="conta" class="form-control" id="input-conta" aria-describedby="contaHelp">
-            <small id="contaHelp" class="form-text text-muted">{{formulario.contains('conta')}}</small>
+            <input formControlName="descricao" type="conta" class="form-control" id="input-conta" aria-describedby="contaHelp">
+            <small id="contaHelp" class="form-text text-success" *ngIf="formulario.get('descricao').valid && formulario.get('descricao').touched">Ok</small>
+            <small id="contaHelp" class="form-text text-danger" *ngIf="!formulario.get('descricao').valid && formulario.get('descricao').touched">campo obigatorio.</small>
           </div>
-          <div class="form-group">
+          <div class="form-group ">
             <label for="input-saldo">Saldo</label>
-            <input formControlName="saldo" type="saldo" class="form-control" id="input-saldo" aria-describedby="saldoHelp">
-            <small id="saldoHelp" class="form-text text-muted">Erro</small>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">R$</span>
+                </div>
+                <input formControlName="saldo" type="number" class="form-control" id="input-saldo" aria-describedby="saldoHelp">
+              </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" (click)="save()" class="btn btn-primary">Cadastrar ou Salvar</button>
+        <button #idsave type="button" (click)="saveOrUpdate()" data-dismiss="" class="btn btn-primary">{{isUpdate? 'Salvar' : 'Cadastrar'}}</button>
       </div>
     </div>
   </div>

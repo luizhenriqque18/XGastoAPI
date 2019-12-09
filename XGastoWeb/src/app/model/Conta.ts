@@ -6,9 +6,9 @@ export class Conta implements ContaDto {
   imgUrl?: string;
   saldo?: number;
 
-  constructor(descricao: string, saldo: number, id?: number, imgUrl?: string) {
+  constructor(descricao?: string, saldo?: number, id?: number, imgUrl?: string) {
     this.descricao = descricao;
-    this.id = id;
+    this.id = id ;
     this.imgUrl = imgUrl;
     this.saldo = saldo;
   }

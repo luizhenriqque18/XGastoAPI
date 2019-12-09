@@ -9,10 +9,7 @@ import {PainelResolver} from "./painel-resolver";
 const routes: Routes = [
     {
       path: '',
-      component: PainelComponent,
-      resolve: {
-        PainelResolver
-      }
+      component: PainelComponent
     },
     {
       path: 'conta',

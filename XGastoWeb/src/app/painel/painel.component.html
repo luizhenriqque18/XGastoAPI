@@ -3,7 +3,13 @@
     <nav class="navbar col-sm-12 navbar-expand-xl navbar-dark bg-primary">
       <a class="navbar-brand" href="#">XGastp</a>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarTogglerDemo02"
+              aria-controls="navbarTogglerDemo02"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -22,13 +28,17 @@
       </div>
     </nav>
   </div>
-
   <div class="row m-sm-5">
     <div class="col-sm-12 col-md-12 col-lg-5 col-xl-5">
       <div class="card text-center">
         <div class="card-header justify-content-between">
           Contas
-          <a class="btn btn-primary align-items-end" role="button" href="" data-toggle="modal" data-target="#exampleModal">Criar Conta</a>
+          <a class="btn btn-primary align-items-end"
+             role="button"
+             href=""
+             data-toggle="modal"
+             data-target="#exampleModal"
+             (click)="dispatchCreate()"> Criar Conta</a>
         </div>
         <div class="card-body painel-gasto">
           <app-conta></app-conta>
@@ -40,4 +50,3 @@
     </div>
   </div>
 </div>
-
