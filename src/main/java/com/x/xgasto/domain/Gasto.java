@@ -2,6 +2,7 @@ package com.x.xgasto.domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "gasto")
@@ -19,11 +20,17 @@ public class Gasto {
     @JoinColumn(name = "cat_gasto_id")
     private CategoriaGasto categoriaGasto;
 
+    @OneToMany(mappedBy = "gasto")
+    private List<Pagamento> pagamentos;
+
     @Column(name = "descricao")
     private String descricao;
 
     @Column(name = "valor")
     private BigDecimal valor;
+
+    @Column(name = "total")
+    private BigDecimal total;
 
     @Column(name = "parcela")
     private Long parcela;
